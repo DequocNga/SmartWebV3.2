@@ -61,7 +61,9 @@ public class AuthController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		String jwt = tokenProvider.generateToken(authentication);
-		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+		Long userID = tokenProvider.getUserIdFromJWT(jwt);
+	//	return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, userID));
 	}
 
 	@CrossOrigin
